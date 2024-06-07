@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Demande extends Model
 {
     use HasFactory;
+    protected $guard = [];
 }
