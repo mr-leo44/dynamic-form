@@ -12,7 +12,8 @@ class DemandeController extends Controller
      */
     public function index()
     {
-        //
+        $demandes = Demande::all();
+        return view('demandes.index', compact('demandes'));
     }
 
     /**

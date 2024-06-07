@@ -1,13 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Requisitions') }}
+            {{ __('Items') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 @if (session('success'))
                     <div role="alert" class="bg-green-500 text-white px-3 py-2 rounded-lg mb-4 flex justify-end transition duration-1000">
                         {{ session('success') }}
@@ -25,13 +24,15 @@
                     <div class="relative sm:flex sm:justify-center sm:items-center selection:text-white">
                         <div class="max-w-7xl mx-auto p-6 lg:p-8">
                             <div class="flex justify-center font-semibold text-4xl">
-                                <h1>Liste des demandes</h1>
+                                <h1>
+                                    {{-- Liste des demandes --}}
+                                </h1>
                             </div>
                         </div>
                     </div>
 
                     <div class="overflow-x-auto">
-                        <div class="flex justify-end my-6">
+                        <div class="flex justify-end my-2">
                             <a href="{{ route('demandes.create') }}" class="bg-indigo-700 px-6 py-1 text-white rounded">Nouveau</a>
                         </div>
                         <table class="w-full">
@@ -80,7 +81,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <script>
         function destroy(event) {
