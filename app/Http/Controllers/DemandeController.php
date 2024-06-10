@@ -21,7 +21,7 @@ class DemandeController extends Controller
      */
     public function create()
     {
-        //
+        return view('demandes.create');
     }
 
     /**
