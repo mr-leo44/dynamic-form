@@ -28,14 +28,14 @@
                         </div>
                     @endif
                     <div class="flex justify-end input-group-append">
-                        <x-primary-button class="add-input text-sm">
+                        <x-primary-button class="text-sm" id="add-item">
                             {{ __('Ajouter') }}
                         </x-primary-button>
                     </div>
                     <form class="w-full" action="{{ route('demandes.store') }}" method="POST">
                         @csrf
-                        <div id="input-container">
-                            <div class="grid gap-3 mb-6 md:grid-cols-2 input-group">
+                        <div id="items-container">
+                            <div class="grid gap-3 mb-6 md:grid-cols-3 item-row">
                                 <div>
                                     <x-input-label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         for="designation" :value="__('Designation')" />
@@ -55,8 +55,14 @@
                                         autofocus autocomplete="qte_demandee" />
                                     <x-input-error :messages="$errors->get('qte_demandee')" class="mt-2" />
                                 </div>
+                                <div class="flex gap-3 items-start md:my-[13%]">
+                                    <x-primary-button class="text-sm" id="add-item">
+                                        {{ __('Ajouter') }}
+                                    </x-primary-button>
+                                </div>
                             </div>
                         </div>
+
                         <div class="flex justify-start mb-4">
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -68,4 +74,54 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        var itemCounter = 1;
+        var itemsContainer = document.getElementById('items-container');
+        var addButton = document.getElementById('add-item')
+        addButton.addEventListener('click', function(event) {
+            event.preventDefault()
+            var newItemRow = document.createElement('div');
+            newItemRow.classList.add('item-row', 'grid', 'gap-3', 'md:grid-cols-3');
+
+            var designationInput = document.createElement('div')
+            designationInput.innerHTML = `
+                    <x-input-label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        for="designation" :value="__('Designation')" />
+                    <x-text-input id="designation"
+                        class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        type="text" name="demandes[${itemCounter}][designation]" :value="old('designation')"
+                        placeholder="Ex. Rame papier duplicataire" required autofocus
+                        autocomplete="designation" />
+                    <x-input-error :messages="$errors->get('designation')" class="mt-2" />                
+                `;
+
+            var qteInput = document.createElement('div');
+            qteInput.innerHTML = `
+                    <x-input-label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        for="qte_demandee" :value="__('Quantité')" />
+                    <x-text-input id="qte_demandee"
+                        class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        type="number" name="demandes[${itemCounter}][qte_demandee]" :value="old('qte_demandee')" required
+                        autofocus autocomplete="qte_demandee" />
+                    <x-input-error :messages="$errors->get('qte_demandee')" class="mt-2" />
+                `
+            var actionDiv = document.createElement('div');
+            actionDiv.classList.add('flex', 'md:my-[13%]', 'gap-3', 'items-start');
+            actionDiv.innerHTML = `
+                <x-primary-button class="text-sm remove-item" id="add-item">
+                            {{ __('Ajouter') }}
+                        </x-primary-button>
+            `
+            newItemRow.appendChild(designationInput);
+            newItemRow.appendChild(qteInput);
+            newItemRow.appendChild(actionDiv);
+            itemsContainer.appendChild(newItemRow);
+
+            itemCounter++;
+        });
+        var removeButton = document.getElementById('remove-item')
+    </script>
+
 </x-app-layout>
