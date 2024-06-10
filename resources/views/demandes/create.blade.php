@@ -13,7 +13,7 @@
                         <div class="max-w-7xl mx-auto p-6 lg:p-8">
                             <div class="max-w-7xl mx-auto p-6 lg:p-8">
                                 <div class="flex justify-center font-semibold text-4xl">
-                                    <h1>Create an item</h1>
+                                    <h1>Initier une demande</h1>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                     <form class="w-full" action="{{ route('demandes.store') }}" method="POST">
                         @csrf
                         <div id="input-container">
-                            <div class="grid gap-3 mb-6 md:grid-cols-2 input-group">
+                            <div class="grid gap-3 mb-6 md:grid-cols-3 input-group">
                                 <div>
                                     <x-input-label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                         for="designation" :value="__('Designation')" />
@@ -54,7 +54,16 @@
                                         type="number" name="demande[0]['qte_demandee']" :value="old('qte_demandee')" required
                                         autofocus autocomplete="qte_demandee" />
                                     <x-input-error :messages="$errors->get('qte_demandee')" class="mt-2" />
+
                                 </div>
+
+                                <div>
+                                <x-input-label class="block mb-9 text-sm font-medium text-gray-900 dark:text-white"/>
+
+                                <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Supprimer</a>
+
+                                </div>
+
                             </div>
                         </div>
                         <div class="flex justify-start mb-4">
@@ -68,4 +77,47 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            var i = 1;
+            $('.add-input').click(function (e) {
+                e.preventDefault();
+                i++;
+                $('#input-container').append(`
+                    <div class="grid gap-3 mb-6 md:grid-cols-3 input-group">
+                        <div>
+                            <x-input-label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="designation" :value="__('Designation')" />
+                            <x-text-input id="designation"
+                                class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="text" name="demande[${i}]['designation']" :value="old('designation')"
+                                placeholder="Ex. Rame papier duplicataire" required autofocus
+                                autocomplete="designation" />
+                            <x-input-error :messages="$errors->get('designation')" class="mt-2" />
+                        </div>
+                        <div>
+                            <x-input-label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="qte_demandee" :value="__('Quantité')" />
+                            <x-text-input id="qte_demandee"
+                                class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="number" name="demande[${i}]['qte_demandee']" :value="old('qte_demandee')" required
+                                autofocus autocomplete="qte_demandee" />
+                            <x-input-error :messages="$errors->get('qte_demandee')" class="mt-2" />
+                        </div>
+
+                        <div>
+                                <x-input-label class="block mb-9 text-sm font-medium text-gray-900 dark:text-white"/>
+
+                                <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Supprimer</a>
+
+                                </div>
+
+                    </div>
+                `);
+            });
+
+        });
+        
+    </script>
+
 </x-app-layout>
