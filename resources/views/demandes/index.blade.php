@@ -39,7 +39,7 @@
                             <thead class="bg-white border-b">
                                 <tr>
                                     <th scope="col" class="text-sm font-medium bg-indigo-100 text-indigo-900 px-6 py-4 text-left">
-                                        Numero
+                                        N° Demande
                                     </th>
                                     <th scope="col" class="text-sm font-medium bg-indigo-100 text-indigo-900 px-6 py-4 text-left">Service
                                     </th>
@@ -50,17 +50,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($demandes as $key => $demande)
+                                @foreach ($demandes as $demande)
                                     <tr class="bg-gray-100 border-b">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-900">{{ $key + 1 }}
-                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-900">
                                             {{ $demande->num_demande }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-900">
-                                            {{ $demande->service_id }}</td>
+                                            {{ __('Marketing') }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-900">
-                                            {{ $demande->user_id }}</td>
-                                        
+                                            {{ $demande->user->name }}</td>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-900 first:mr-2 last:ml-2">
                                             <a href="{{ route('demandes.show', $demande->id) }}"

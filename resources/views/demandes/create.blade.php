@@ -41,7 +41,7 @@
                                         for="designation" :value="__('Designation')" />
                                     <x-text-input id="designation"
                                         class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        type="text" name="demande[0]['designation']" :value="old('designation')"
+                                        type="text" name="demandes[0][designation]" :value="old('designation')"
                                         placeholder="Ex. Rame papier duplicataire" required autofocus
                                         autocomplete="designation" />
                                     <x-input-error :messages="$errors->get('designation')" class="mt-2" />
@@ -51,9 +51,9 @@
                                         for="qte_demandee" :value="__('Quantité')" />
                                     <x-text-input id="qte_demandee"
                                         class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        type="number" name="demande[0]['qte_demandee']" :value="old('qte_demandee')" required
+                                        type="number" name="demandes[0][qte_demandee]" :value="old('qte_demandee')" required
                                         autofocus autocomplete="qte_demandee" />
-                                    <x-input-error :messages="$errors->get('qte_demandee')" class="mt-2" />
+                                    <x-input-error :messages="$errors->get('qte_demandese')" class="mt-2" />
 
                                 </div>
 
@@ -79,7 +79,7 @@
     </div>
     <script>
         $(document).ready(function () {
-            var i = 1;
+            var i = 0;
             $('.add-input').click(function (e) {
                 e.preventDefault();
                 i++;
@@ -90,7 +90,7 @@
                                 for="designation" :value="__('Designation')" />
                             <x-text-input id="designation"
                                 class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                type="text" name="demande[${i}]['designation']" :value="old('designation')"
+                                type="text" name="demandes[${i}][designation]" :value="old('designation')"
                                 placeholder="Ex. Rame papier duplicataire" required autofocus
                                 autocomplete="designation" />
                             <x-input-error :messages="$errors->get('designation')" class="mt-2" />
@@ -100,7 +100,7 @@
                                 for="qte_demandee" :value="__('Quantité')" />
                             <x-text-input id="qte_demandee"
                                 class="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                type="number" name="demande[${i}]['qte_demandee']" :value="old('qte_demandee')" required
+                                type="number" name="demandes[${i}][qte_demandee]" :value="old('qte_demandee')" required
                                 autofocus autocomplete="qte_demandee" />
                             <x-input-error :messages="$errors->get('qte_demandee')" class="mt-2" />
                         </div>
