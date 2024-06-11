@@ -15,7 +15,7 @@ class DemandeController extends Controller
      */
     public function index()
     {
-        $demandes = Demande::with('user')->get();
+        $demandes = Demande::with('user')->paginate();
         return view('demandes.index', compact('demandes'));
     }
 
