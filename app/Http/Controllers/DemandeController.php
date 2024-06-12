@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Demande;
-use App\Models\DemandeDetail;
+use App\Mail\DemandeMail;
 use Illuminate\Http\Request;
+use App\Models\DemandeDetail;
+use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class DemandeController extends Controller
 {
@@ -15,7 +19,7 @@ class DemandeController extends Controller
      */
     public function index()
     {
-        $demandes = Demande::with('user')->paginate();
+        $demandes = Demande::with('user')->paginate(10);
         return view('demandes.index', compact('demandes'));
     }
 
@@ -42,6 +46,11 @@ class DemandeController extends Controller
         ]);
 
         if($demande){
+            try {
+                Mail::to($demande->user->email, $demande->user->name)->queue(new DemandeMail($demande));
+            } catch (Exception $e) {
+                $e->getMessage();
+            }
             foreach ($request->demandes as $item) {
                 // dd($item["qte_demandee"]);
                 DemandeDetail::create([
