@@ -47,19 +47,19 @@ class DemandeController extends Controller
 
         if($demande){
             try {
-                Mail::to($demande->user->email, $demande->user->name)->queue(new DemandeMail($demande));
+                Mail::to($demande->user->email, $demande->user->name)->send(new DemandeMail($demande));
+                foreach ($request->demandes as $item) {
+                    // dd($item["qte_demandee"]);
+                    DemandeDetail::create([
+                        'designation' => $item["designation"],
+                        'qte_demandee' => $item["qte_demandee"],
+                        'qte_livree' => 0,
+                        'demande_id' => $demande->id
+                    ]
+                    );
+                }
             } catch (Exception $e) {
                 $e->getMessage();
-            }
-            foreach ($request->demandes as $item) {
-                // dd($item["qte_demandee"]);
-                DemandeDetail::create([
-                    'designation' => $item["designation"],
-                    'qte_demandee' => $item["qte_demandee"],
-                    'qte_livree' => 0,
-                    'demande_id' => $demande->id
-                ]
-                );
             }
         }
 

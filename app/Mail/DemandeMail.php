@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class DemandeMail extends Mailable implements ShouldQueue
+class DemandeMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -17,9 +17,11 @@ class DemandeMail extends Mailable implements ShouldQueue
      * Create a new message instance.
      */
 
-    public function __construct(public $demande)
+    public $demande;
+
+    public function __construct($demande)
     {
-        //
+        $this->demande = $demande;
     }
 
     /**
