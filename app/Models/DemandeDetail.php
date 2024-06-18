@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Demande;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DemandeDetail extends Model
 {
@@ -14,4 +15,8 @@ class DemandeDetail extends Model
         'qte_livree',
         'demande_id'
     ];
+
+    public function demande(){
+        return $this->belongsTo(Demande::class);
+    }
 }
