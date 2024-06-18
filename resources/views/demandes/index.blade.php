@@ -71,6 +71,9 @@
                                     Utilisateur</th>
                                 <th scope="col"
                                     class="text-sm font-medium bg-orange-100 text-slate-900 px-6 py-4 text-left">
+                                    Date</th>
+                                <th scope="col"
+                                    class="text-sm font-medium bg-orange-100 text-slate-900 px-6 py-4 text-left">
                                     Action</th>
                             </tr>
                         </thead>
@@ -83,6 +86,8 @@
                                         {{ __('Marketing') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
                                         {{ $demande->user->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
+                                        {{ $demande->created_at->format('d-m-Y') }}</td>
                                     <td class="flex gap-3 px-6 py-4 whitespace-nowrap text-sm font-medium first:mr-2 last:ml-2">
                                         <a href="{{ route('demandes.show', $demande->id) }}"
                                             class="bg-orange-500 hover:bg-orange-500 p-2 text-white rounded">
