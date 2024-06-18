@@ -71,7 +71,7 @@ class DemandeController extends Controller
      */
     public function show(Demande $demande)
     {
-        //
+        return view('demandes.show', compact('demande'));
     }
 
     /**
